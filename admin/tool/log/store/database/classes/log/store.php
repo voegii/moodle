@@ -65,6 +65,12 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
      * @return bool
      */
     protected function init() {
+        global $DBEXT;
+
+        if (isset($DBEXT)) {
+            $this->extdb = $DBEXT;
+        }
+
         if (isset($this->extdb)) {
             return !empty($this->extdb);
         }
@@ -105,6 +111,7 @@ class store implements \tool_log\log\writer, \core\log\sql_reader {
         }
 
         $this->extdb = $db;
+        $DBEXT = $this->extdb;
         return true;
     }
 
